@@ -13,3 +13,12 @@ jobs:
           name: Which bundler?
           command: bundle -v
       - ruby/bundle-install
+  deploy:
+    docker:
+      - image: circleci/ruby:2.6.2-stretch-node
+    steps:
+      - checkout
+      - run:
+          name: Deploy Master to Heroku
+          command: |
+             git push https://heroku:3194f2b1-bf6d-4cbd-8da9-5355ae9cf1e8@git.heroku.com/shop-api-app.git master
