@@ -22,3 +22,14 @@ jobs:
           name: Deploy Master to Heroku
           command: |
              git push https://heroku:3194f2b1-bf6d-4cbd-8da9-5355ae9cf1e8@git.heroku.com/shop-api-app.git master
+workflows:
+   version: 2
+   build-deploy:
+     jobs:
+       - build
+       - deploy:
+           requires:
+             - build # only run deploy-via-git job if the build job has completed
+           filters:
+             branches:
+               only: master 
